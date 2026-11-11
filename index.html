@@ -121,13 +121,32 @@
             }
         }
 
-        function sendToTelegram() {
-            const token = '9127008428:AAEOHQmAA6L0rbrKHi_A_5pp41EKm8_OkqI'; 
-            const chatId = '238254086'; 
+       function sendToTelegram() {
             
-            const text = `💕 ОНА ВЫБРАЛА:\n\n🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}`;
+            const formspreeUrl = 'https://formspree.io/f/xaeowdvp'; 
+            
+            const text = `🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}`;
 
-            const url = `https://tg-proxy.dapenkov.workers.dev/bot${token}/sendMessage`;
+            fetch(formspreeUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Выбор девушки": text,
+                    "Email": "dapenkov@yandex.ru" // Твой email
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Успешно отправлено!');
+                } else {
+                    console.log('Ошибка отправки');
+                }
+            })
+            .catch(error => console.log('Ошибка:', error));
+        }
             
             fetch(url, {
                 method: 'POST',
