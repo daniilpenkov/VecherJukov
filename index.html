@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наш вечер 💕</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 30px; font-size: 0.95rem; }
+        .step { display: none; animation: fadeIn 0.4s ease; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        h2 { font-size: 1.3rem; margin-bottom: 20px; text-align: center; }
+        .options { display: grid; gap: 12px; }
+        .option-btn {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .option-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #e94560;
+            transform: translateY(-2px);
+        }
+        .final-msg { text-align: center; font-size: 1.2rem; line-height: 1.6; }
+        .heart { font-size: 3rem; display: block; margin-bottom: 20px; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Привет, солнышко 💖</h1>
+        <p class="subtitle">Давай спланируем наш идеальный вечер</p>
+
+        <!-- Шаг 1: Фильм -->
+        <div class="step active" id="step1">
+            <h2>🎬 Что посмотрим?</h2>
+            <div class="options">
+                <button class="option-btn" onclick="choose('film', 'Интерстеллар')">🌌 Интерстеллар</button>
+                <button class="option-btn" onclick="choose('film', 'Джентльмены')">🕶️ Джентльмены</button>
+                <button class="option-btn" onclick="choose('film', 'Что-то лёгкое (комедия)')">😂 Комедия</button>
+                <button class="option-btn" onclick="choose('film', 'Аниме')">🌸 Аниме</button>
+            </div>
+        </div>
+
+        <!-- Шаг 2: Закуски -->
+        <div class="step" id="step2">
+            <h2>🍿 Чем похрустим?</h2>
+            <div class="options">
+                <button class="option-btn" onclick="choose('snack', 'Попкорн')">🍿 Попкорн</button>
+                <button class="option-btn" onclick="choose('snack', 'Начос с сыром')">🧀 Начос</button>
+                <button class="option-btn" onclick="choose('snack', 'Пицца')">🍕 Пицца</button>
+                <button class="option-btn" onclick="choose('snack', 'Фрукты и шоколад')">🍫 Фрукты и шоколад</button>
+            </div>
+        </div>
+
+        <!-- Шаг 3: Напитки -->
+        <div class="step" id="step3">
+            <h2>🥤 Что попьём?</h2>
+            <div class="options">
+                <button class="option-btn" onclick="choose('drink', 'Красное вино')">🍷 Красное вино</button>
+                <button class="option-btn" onclick="choose('drink', 'Пиво')">🍺 Пиво</button>
+                <button class="option-btn" onclick="choose('drink', 'Кола/Лимонад')">🥤 Кола/Лимонад</button>
+                <button class="option-btn" onclick="choose('drink', 'Чай/Кофе')">☕ Чай/Кофе</button>
+            </div>
+        </div>
+
+        <!-- Финал -->
+        <div class="step" id="step4">
+            <div class="final-msg">
+                <span class="heart">💖</span>
+                <p>Спасибо, любимая!</p>
+                <p style="color:#aaa; font-size:0.9rem; margin-top:15px;">Я уже побежал готовить всё для нашего вечера. Скоро увидишь результат 😉</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const answers = {};
+        let currentStep = 1;
+
+        function choose(category, value) {
+            answers[category] = value;
+            document.getElementById('step' + currentStep).classList.remove('active');
+            currentStep++;
+            document.getElementById('step' + currentStep).classList.add('active');
+
+            // Если это был последний шаг — отправляем в телегу
+            if (currentStep === 4) {
+                sendToTelegram();
+            }
+        }
+
+        function sendToTelegram() {
+            const token = 'ТВОЙ_ТОКЕН'; // <-- ЗАМЕНИ
+            const chatId = 'ТВОЙ_CHAT_ID'; // <-- ЗАМЕНИ
+            
+            const text = `💕 ОНА ВЫБРАЛА:\n\n🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}`;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text
+                })
+            }).catch(err => console.log('Ошибка отправки:', err));
+        }
+    </script>
+</body>
+</html>
