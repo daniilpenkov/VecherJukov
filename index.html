@@ -46,6 +46,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            width: 100%;
         }
         .option-btn:hover {
             background: rgba(255,255,255,0.15);
@@ -110,20 +111,24 @@
         let currentStep = 1;
 
         function choose(category, value) {
+            // Записываем выбор
             answers[category] = value;
+            
+            // Переключаем шаг
             document.getElementById('step' + currentStep).classList.remove('active');
             currentStep++;
             document.getElementById('step' + currentStep).classList.add('active');
 
-            // Если это был последний шаг — отправляем данные
+            // Если это был последний шаг, отправляем данные
             if (currentStep === 4) {
-                sendToFormspree();
+                sendData();
             }
         }
 
-        function sendToFormspree() {
+        function sendData() {
             const formspreeUrl = 'https://formspree.io/f/xaeowdvp'; 
             
+            // Собираем текст из ответов
             const text = `🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}`;
 
             fetch(formspreeUrl, {
