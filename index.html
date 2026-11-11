@@ -115,14 +115,13 @@
             currentStep++;
             document.getElementById('step' + currentStep).classList.add('active');
 
-            // Если это был последний шаг — отправляем в телегу
+            // Если это был последний шаг — отправляем данные
             if (currentStep === 4) {
-                sendToTelegram();
+                sendToFormspree();
             }
         }
 
-       function sendToTelegram() {
-            
+        function sendToFormspree() {
             const formspreeUrl = 'https://formspree.io/f/xaeowdvp'; 
             
             const text = `🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}`;
@@ -134,28 +133,17 @@
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    "Выбор девушки": text,
-                    "Email": "dapenkov@yandex.ru" // Твой email
+                    "Выбор для вечера": text
                 })
             })
             .then(response => {
                 if (response.ok) {
-                    console.log('Успешно отправлено!');
+                    console.log('Успешно отправлено в Formspree!');
                 } else {
-                    console.log('Ошибка отправки');
+                    console.log('Ошибка при отправке в Formspree');
                 }
             })
             .catch(error => console.log('Ошибка:', error));
-        }
-            
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: text
-                })
-            }).catch(err => console.log('Ошибка отправки:', err));
         }
     </script>
 </body>
