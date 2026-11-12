@@ -7,52 +7,54 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
+        /* Базовый фон и размытие */
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            
-            /* 1. ЧЕТКОЕ ФОТО ПО ЦЕНТРУ */
-            background-image: url('https://sun9-77.vkuserphoto.ru/s/v1/ig2/PaEN9WzLrsDIZ3B3U7vu4oIEZU5cTTZUPoxfqiZVUN71H44_6Rbar6l6LP37BD3YR5i59ofjnLduPKz03nNYgMnZ.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280,1080x1920&from=bu&u=-L2g89e4tqKHpfnizaKh_7gEyOqMxTcbURyr5NMnMo8&cs=1080x0');
-            background-size: contain; /* Вписывает фото целиком */
-            background-position: center; /* Ставит ровно по центру */
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            
+            background-color: #111; /* Темный фон на всякий случай */
             color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
         }
 
-        /* 2. БЕЛОЕ РАЗМЫТИЕ ПО БОКАМ */
-        body::before {
-            content: "";
+        /* Размытый фон на весь экран */
+        .bg-blur {
             position: fixed;
-            top: -5%; left: -5%; width: 110%; height: 110%; /* Чуть больше экрана, чтобы не было белых краев при размытии */
-            
-            /* Берем ту же картинку и растягиваем на весь экран */
+            top: -20px; left: -20px; right: -20px; bottom: -20px; /* Чуть больше экрана, чтобы не было краев */
             background-image: url('https://sun9-77.vkuserphoto.ru/s/v1/ig2/PaEN9WzLrsDIZ3B3U7vu4oIEZU5cTTZUPoxfqiZVUN71H44_6Rbar6l6LP37BD3YR5i59ofjnLduPKz03nNYgMnZ.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280,1080x1920&from=bu&u=-L2g89e4tqKHpfnizaKh_7gEyOqMxTcbURyr5NMnMo8&cs=1080x0');
             background-size: cover;
             background-position: center;
-            
-            /* Накладываем белый фильтр и делаем сильное размытие */
-            background-color: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(20px); 
-            
-            z-index: -1; /* Отправляем за контент */
+            filter: blur(25px) brightness(0.4); /* Сильное размытие и затемнение */
+            z-index: -1;
         }
 
-        /* Твой контейнер с карточками (сделал чуть темнее для контраста с белым фоном) */
+        /* Четкое фото по центру */
+        .bg-clear {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://sun9-77.vkuserphoto.ru/s/v1/ig2/PaEN9WzLrsDIZ3B3U7vu4oIEZU5cTTZUPoxfqiZVUN71H44_6Rbar6l6LP37BD3YR5i59ofjnLduPKz03nNYgMnZ.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280,1080x1920&from=bu&u=-L2g89e4tqKHpfnizaKh_7gEyOqMxTcbURyr5NMnMo8&cs=1080x0');
+            background-size: contain; /* Вписываем фото целиком */
+            background-position: center; /* По центру */
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        /* Твой контейнер с карточками */
         .container {
-            max-width: 800px; 
+            max-width: 850px; 
             width: 100%;
-            background: rgba(20, 20, 30, 0.85); 
+            background: rgba(15, 15, 20, 0.85); /* Темная подложка */
             backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 30px 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
         }
         
         h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
@@ -122,6 +124,10 @@
     </style>
 </head>
 <body>
+    <!-- Слои для фона -->
+    <div class="bg-blur"></div>
+    <div class="bg-clear"></div>
+
     <div class="container">
         <h1>Привет, солнышко 💖</h1>
         <p class="subtitle">Давай спланируем наш идеальный вечер</p>
@@ -132,7 +138,8 @@
             <div class="options">
                 
                 <button class="option-card" onclick="choose('film', 'Интерстеллар')">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Интерстеллар">
+                    <!-- Замени ссылки на свои, если нужно -->
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9cf38fb7-6482-41db-8251-6e00f3237c4b/300x450" alt="Интерстеллар">
                     <div class="card-content">
                         <div class="card-title">🌌 Интерстеллар</div>
                         <div class="card-desc">Фантастика, которая заставит задуматься о времени и космосе.</div>
@@ -140,7 +147,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('film', 'Джентльмены')">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/The_Gentlemen_poster.jpeg/220px-The_Gentlemen_poster.jpeg" alt="Джентльмены">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/69036a2e-fd41-44e7-bd1e-d1a7b2b8a2d2/300x450" alt="Джентльмены">
                     <div class="card-content">
                         <div class="card-title">🕶️ Джентльмены</div>
                         <div class="card-desc">Стильный боевик Гая Ричи с крутыми диалогами.</div>
@@ -148,7 +155,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('film', 'Комедия')">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/The_Hangover_poster.jpg/220px-The_Hangover_poster.jpg" alt="Комедия">
+                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/4483445/4d121a8a-bd35-4318-bd77-85ec24e3087f/300x450" alt="Комедия">
                     <div class="card-content">
                         <div class="card-title">😂 Что-то лёгкое</div>
                         <div class="card-desc">Просто хорошая комедия, чтобы посмеяться и отдохнуть.</div>
