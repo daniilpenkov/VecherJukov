@@ -54,13 +54,35 @@
         }
         
         h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
-        .subtitle { text-align: center; color: #ddd; margin-bottom: 30px; font-size: 0.95rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        
+        /* Увеличили шрифт подзаголовка */
+        .subtitle { 
+            text-align: center; 
+            color: #ddd; 
+            margin-bottom: 30px; 
+            font-size: 1.15rem; /* Было 0.95rem */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+        }
         
         .step { display: none; animation: fadeIn 0.4s ease; }
         .step.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        h2 { font-size: 1.4rem; margin-bottom: 20px; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        h2 { 
+            font-size: 1.4rem; 
+            margin-bottom: 5px; /* Уменьшили отступ снизу, так как добавили подзаголовок */
+            text-align: center; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
+        }
+
+        /* Стиль для мелкой фразы про рейтинги */
+        .step-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
         
         .options { 
             display: grid; 
@@ -127,7 +149,8 @@
 
         <!-- Шаг 1: Фильм -->
         <div class="step active" id="step1">
-            <h2>🎬 Что посмотрим?(всё новернькое, рейтинги не подводят)</h2>
+            <h2>🎬 Что посмотрим?</h2>
+            <div class="step-subtitle">(всё новенькое, рейтинги не подводят)</div>
             <div class="options">
                 
                 <button class="option-card" onclick="choose('film', 'Афера доктора Нока')">
