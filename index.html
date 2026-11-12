@@ -143,15 +143,23 @@
         /* Стили для финального экрана и формы */
         .final-msg { 
             text-align: center; 
-            font-size: 1.5rem; 
             line-height: 1.6; 
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
             padding: 20px 0 10px 0;
         }
+        
+        /* Поменяли размеры шрифтов местами */
         .final-msg p:nth-child(2) {
-            font-size: 1.2rem; 
+            font-size: 1.7rem; /* "Спасибо, любимая!" - увеличили */
+            font-weight: bold;
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .final-msg p:nth-child(3) {
+            font-size: 1.2rem; /* "Я подготовлю..." - уменьшили */
             color: #ddd;
-            margin-top: 15px;
             margin-bottom: 25px;
         }
         
@@ -172,7 +180,7 @@
 
         .message-label {
             font-size: 0.95rem;
-            color: #e94560;
+            color: #ffb3c1; /* Сделали цвет нежнее (светло-розовый) */
             text-align: center;
             font-weight: bold;
             margin-bottom: 5px;
@@ -196,12 +204,12 @@
             color: #777;
         }
         .message-input:focus {
-            border-color: #e94560;
+            border-color: #ffb3c1;
         }
 
         .submit-btn {
-            background: #e94560;
-            color: #fff;
+            background: #ffb3c1; /* Сделали кнопку нежно-розовой */
+            color: #333; /* Темный текст для контраста на светлом фоне */
             border: none;
             border-radius: 12px;
             padding: 15px;
@@ -212,7 +220,7 @@
             margin-top: 10px;
         }
         .submit-btn:hover {
-            background: #c7334b;
+            background: #ff99b0;
             transform: scale(1.02);
         }
         .submit-btn:active {
@@ -383,7 +391,8 @@
             <!-- Блок с пожеланиями -->
             <div class="message-box">
                 <div class="message-label">Сюда можешь вписать свои варианты, дополнения или передать послание</div>
-                <textarea id="custom-message" class="message-input" placeholder="Например: я хочу ещё сырную тарелку, или давай посмотрим комедию, или просто напиши что-нибудь милое..."></textarea>
+                <!-- Заменили текст внутри поля -->
+                <textarea id="custom-message" class="message-input" placeholder="Семечка мне помогал, если честно с:"></textarea>
                 <button class="submit-btn" onclick="finalSubmit()">Отправить мне 💌</button>
             </div>
         </div>
@@ -405,15 +414,11 @@
             }
         }
 
-        // Эта функция вызывается, когда она нажимает "Отправить мне" на последнем слайде
         function finalSubmit() {
-            // Получаем текст из окошка
             const customMessage = document.getElementById('custom-message').value.trim();
             
-            // Собираем все данные для отправки
             const text = `🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}\n\n💌 Послание: ${customMessage || 'Без послания'}`;
 
-            // Блокируем кнопку, чтобы не нажали дважды
             const btn = document.querySelector('.submit-btn');
             btn.disabled = true;
             btn.textContent = 'Отправляю...';
@@ -428,8 +433,8 @@
             .then(response => {
                 if (response.ok) {
                     btn.textContent = 'Отправлено! 💖';
-                    btn.style.backgroundColor = '#28a745'; // Зеленый цвет успеха
-                    btn.style.borderColor = '#28a745';
+                    btn.style.backgroundColor = '#28a745'; 
+                    btn.style.color = '#fff';
                 } else {
                     btn.textContent = 'Ошибка :(';
                     btn.disabled = false;
