@@ -55,12 +55,11 @@
         
         h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         
-        /* Увеличили шрифт подзаголовка */
         .subtitle { 
             text-align: center; 
             color: #ddd; 
             margin-bottom: 30px; 
-            font-size: 1.15rem; /* Было 0.95rem */
+            font-size: 1.15rem; 
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
         }
         
@@ -70,12 +69,11 @@
         
         h2 { 
             font-size: 1.4rem; 
-            margin-bottom: 5px; /* Уменьшили отступ снизу, так как добавили подзаголовок */
+            margin-bottom: 5px; 
             text-align: center; 
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
         }
 
-        /* Стиль для мелкой фразы про рейтинги */
         .step-subtitle {
             text-align: center;
             font-size: 0.85rem;
@@ -201,27 +199,38 @@
             <h2>🍿 Чем похрустим?</h2>
             <div class="options">
                 
-                <button class="option-card" onclick="choose('snack', 'Попкорн')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Popcorn02.jpg/640px-Popcorn02.jpg" alt="Попкорн">
+                <button class="option-card" onclick="choose('snack', 'Пицца и приколы из ДоДо')">
+                    <img src="https://i.pinimg.com/736x/c5/5a/dd/c55add088fb14e28ae4b36b7d94521e0.jpg" alt="Пицца и приколы из ДоДо">
                     <div class="card-content">
-                        <div class="card-title">🍿 Попкорн</div>
-                        <div class="card-desc">Классика для кино. Сладкий или соленый?</div>
+                        <div class="card-title">🍕 Пицца и приколы из ДоДо</div>
                     </div>
                 </button>
 
-                <button class="option-card" onclick="choose('snack', 'Пицца')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg" alt="Пицца">
+                <button class="option-card" onclick="choose('snack', 'Роллы и приколы')">
+                    <img src="https://fish-ka.su/wp-content/uploads/2018/11/42-Set-Klassicheskij-1024x683.png" alt="Роллы и приколы">
                     <div class="card-content">
-                        <div class="card-title">🍕 Пицца</div>
-                        <div class="card-desc">Горячая, с тянущимся сыром. Идеально.</div>
+                        <div class="card-title">🍣 Роллы и приколы</div>
                     </div>
                 </button>
 
-                <button class="option-card" onclick="choose('snack', 'Фрукты и шоколад')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Strawberries_and_chocolate.jpg/640px-Strawberries_and_chocolate.jpg" alt="Фрукты и шоколад">
+                <button class="option-card" onclick="choose('snack', 'Шаурма и рыбка на углях')">
+                    <img src="https://avatars.mds.yandex.net/get-altay/10682314/2a0000018b4724b58068fbdcd4372569ac40/XXXL" alt="Шаурма и рыбка на углях">
                     <div class="card-content">
-                        <div class="card-title">🍫 Фрукты и шоколад</div>
-                        <div class="card-desc">Сладкая альтернатива, если хочется чего-то полегче.</div>
+                        <div class="card-title">🌯 Шаурма и рыбка на углях</div>
+                    </div>
+                </button>
+
+                <button class="option-card" onclick="choose('snack', 'Мак')">
+                    <img src="https://scdn.chibbis.ru/live/banners/5df558b9df76fde2991b67cd93ef9ce5.png" alt="Мак">
+                    <div class="card-content">
+                        <div class="card-title">🍔 Мак</div>
+                    </div>
+                </button>
+
+                <button class="option-card" onclick="choose('snack', 'Тортик')">
+                    <img src="https://irecommend.ru/sites/default/files/imagecache/copyright1/user-images/3136352/ExQX01OHbTxSwTtMxlwLQ.jpg" alt="Тортик">
+                    <div class="card-content">
+                        <div class="card-title">🍰 Тортик</div>
                     </div>
                 </button>
 
