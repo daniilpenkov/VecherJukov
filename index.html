@@ -53,7 +53,6 @@
             z-index: 1;
         }
         
-        /* Обертка для шапки, чтобы её можно было скрывать */
         .header-wrap {
             transition: opacity 0.3s ease;
         }
@@ -140,8 +139,21 @@
             line-height: 1.4;
         }
 
-        .final-msg { text-align: center; font-size: 1.2rem; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
-        .heart { font-size: 3rem; display: block; margin-bottom: 20px; animation: pulse 1s infinite; }
+        /* Увеличили шрифт финального сообщения */
+        .final-msg { 
+            text-align: center; 
+            font-size: 1.5rem; /* Было 1.2rem */
+            line-height: 1.6; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
+            padding: 20px 0;
+        }
+        .final-msg p:last-child {
+            font-size: 1.2rem; /* Увеличили и нижнюю строчку */
+            color: #ccc;
+            margin-top: 15px;
+        }
+        
+        .heart { font-size: 4rem; display: block; margin-bottom: 20px; animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
@@ -150,7 +162,6 @@
     <div class="bg-clear"></div>
 
     <div class="container">
-        <!-- Обернули шапку в div с id="main-header" -->
         <div class="header-wrap" id="main-header">
             <h1>Привет, солнышко 💖</h1>
             <p class="subtitle">Давай спланируем вечер двух влюбленных друг в друга жуков 🐞💞🐞</p>
@@ -303,7 +314,7 @@
             <div class="final-msg">
                 <span class="heart">💖</span>
                 <p>Спасибо, любимая!</p>
-                <p style="color:#aaa; font-size:0.9rem; margin-top:15px;">Я уже побежал готовить всё для нашего вечера. Скоро увидишь результат 😉</p>
+                <p>Я подготовлю всё для нашего вечера. Целую 😘</p>
             </div>
         </div>
     </div>
@@ -319,7 +330,6 @@
             currentStep++;
             document.getElementById('step' + currentStep).classList.add('active');
 
-            // Если перешли на второй шаг, скрываем приветствие
             if (currentStep > 1) {
                 document.getElementById('main-header').classList.add('hidden');
             }
