@@ -53,6 +53,14 @@
             z-index: 1;
         }
         
+        /* Обертка для шапки, чтобы её можно было скрывать */
+        .header-wrap {
+            transition: opacity 0.3s ease;
+        }
+        .header-wrap.hidden {
+            display: none;
+        }
+
         h1 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         
         .subtitle { 
@@ -142,8 +150,11 @@
     <div class="bg-clear"></div>
 
     <div class="container">
-        <h1>Привет, солнышко 💖</h1>
-        <p class="subtitle">Давай спланируем вечер двух влюбленных друг в друга жуков 🐞💞🐞</p>
+        <!-- Обернули шапку в div с id="main-header" -->
+        <div class="header-wrap" id="main-header">
+            <h1>Привет, солнышко 💖</h1>
+            <p class="subtitle">Давай спланируем вечер двух влюбленных друг в друга жуков 🐞💞🐞</p>
+        </div>
 
         <!-- Шаг 1: Фильм -->
         <div class="step active" id="step1">
@@ -303,9 +314,15 @@
 
         function choose(category, value) {
             answers[category] = value;
+            
             document.getElementById('step' + currentStep).classList.remove('active');
             currentStep++;
             document.getElementById('step' + currentStep).classList.add('active');
+
+            // Если перешли на второй шаг, скрываем приветствие
+            if (currentStep > 1) {
+                document.getElementById('main-header').classList.add('hidden');
+            }
 
             if (currentStep === 4) {
                 sendData();
