@@ -148,9 +148,8 @@
             padding: 20px 0 10px 0;
         }
         
-        /* Поменяли размеры шрифтов местами */
         .final-msg p:nth-child(2) {
-            font-size: 1.7rem; /* "Спасибо, любимая!" - увеличили */
+            font-size: 1.7rem; 
             font-weight: bold;
             color: #fff;
             margin-top: 10px;
@@ -158,13 +157,48 @@
         }
         
         .final-msg p:nth-child(3) {
-            font-size: 1.2rem; /* "Я подготовлю..." - уменьшили */
+            font-size: 1.2rem; 
             color: #ddd;
             margin-bottom: 25px;
         }
         
         .heart { font-size: 4rem; display: block; margin-bottom: 20px; animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        /* НОВЫЙ БЛОК: Выбор дня */
+        .day-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .day-btn {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .day-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffb3c1;
+        }
+
+        /* Класс для выбранного дня */
+        .day-btn.selected {
+            background: rgba(255, 179, 193, 0.2);
+            border-color: #ffb3c1;
+            color: #ffb3c1;
+            box-shadow: 0 0 15px rgba(255, 179, 193, 0.3);
+        }
 
         /* Блок с формой */
         .message-box {
@@ -180,7 +214,7 @@
 
         .message-label {
             font-size: 0.95rem;
-            color: #ffb3c1; /* Сделали цвет нежнее (светло-розовый) */
+            color: #ffb3c1; 
             text-align: center;
             font-weight: bold;
             margin-bottom: 5px;
@@ -208,8 +242,8 @@
         }
 
         .submit-btn {
-            background: #ffb3c1; /* Сделали кнопку нежно-розовой */
-            color: #333; /* Темный текст для контраста на светлом фоне */
+            background: #ffb3c1; 
+            color: #333; 
             border: none;
             border-radius: 12px;
             padding: 15px;
@@ -225,6 +259,10 @@
         }
         .submit-btn:active {
             transform: scale(0.98);
+        }
+        .submit-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -388,12 +426,19 @@
                 <p>Я подготовлю всё для нашего вечера. Целую 😘</p>
             </div>
             
-            <!-- Блок с пожеланиями -->
+            <!-- Блок с пожеланиями и выбором дня -->
             <div class="message-box">
-                <div class="message-label">Сюда можешь вписать свои варианты, дополнения или передать послание</div>
-                <!-- Заменили текст внутри поля -->
+                <div class="message-label">Когда нам лучше устроить этот вечер?</div>
+                
+                <!-- Кнопки выбора дня -->
+                <div class="day-selector">
+                    <button class="day-btn" onclick="selectDay('Пятница', this)">Вечер пятницы</button>
+                    <button class="day-btn" onclick="selectDay('Суббота', this)">Вечер субботы</button>
+                </div>
+
+                <div class="message-label" style="margin-top: 10px;">Сюда можешь вписать свои варианты, дополнения или передать послание</div>
                 <textarea id="custom-message" class="message-input" placeholder="Семечка мне помогал, если честно с:"></textarea>
-                <button class="submit-btn" onclick="finalSubmit()">Отправить мне 💌</button>
+                <button class="submit-btn" id="submit-btn" onclick="finalSubmit()">Отправить мне 💌</button>
             </div>
         </div>
     </div>
@@ -401,6 +446,7 @@
     <script>
         const answers = {};
         let currentStep = 1;
+        let selectedDay = ''; // Переменная для хранения выбранного дня
 
         function choose(category, value) {
             answers[category] = value;
@@ -414,12 +460,30 @@
             }
         }
 
+        // Функция для выбора дня
+        function selectDay(day, btnElement) {
+            selectedDay = day;
+            
+            // Убираем класс "selected" у всех кнопок
+            const btns = document.querySelectorAll('.day-btn');
+            btns.forEach(b => b.classList.remove('selected'));
+            
+            // Добавляем класс "selected" нажатой кнопке
+            btnElement.classList.add('selected');
+        }
+
         function finalSubmit() {
+            if (!selectedDay) {
+                alert('Пожалуйста, выбери день (пятницу или субботу)!');
+                return;
+            }
+
             const customMessage = document.getElementById('custom-message').value.trim();
             
-            const text = `🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}\n\n💌 Послание: ${customMessage || 'Без послания'}`;
+            // Собираем финальный текст
+            const text = `📅 День: ${selectedDay}\n🎬 Фильм: ${answers.film}\n🍿 Закуски: ${answers.snack}\n🥤 Напитки: ${answers.drink}\n\n💌 Послание: ${customMessage || 'Без послания'}`;
 
-            const btn = document.querySelector('.submit-btn');
+            const btn = document.getElementById('submit-btn');
             btn.disabled = true;
             btn.textContent = 'Отправляю...';
 
