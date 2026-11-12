@@ -9,10 +9,11 @@
         
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            /* Твой фон */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://sun9-77.vkuserphoto.ru/s/v1/ig2/PaEN9WzLrsDIZ3B3U7vu4oIEZU5cTTZUPoxfqiZVUN71H44_6Rbar6l6LP37BD3YR5i59ofjnLduPKz03nNYgMnZ.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280,1080x1920&from=bu&u=-L2g89e4tqKHpfnizaKh_7gEyOqMxTcbURyr5NMnMo8&cs=1080x0');
-            background-size: cover;
-            background-position: center;
+            /* Твой фон с затемнением для читаемости текста */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://sun9-77.vkuserphoto.ru/s/v1/ig2/PaEN9WzLrsDIZ3B3U7vu4oIEZU5cTTZUPoxfqiZVUN71H44_6Rbar6l6LP37BD3YR5i59ofjnLduPKz03nNYgMnZ.jpg?quality=95&as=32x57,48x85,72x128,108x192,160x284,240x427,360x640,480x853,540x960,640x1138,720x1280,1080x1920&from=bu&u=-L2g89e4tqKHpfnizaKh_7gEyOqMxTcbURyr5NMnMo8&cs=1080x0');
+            background-size: cover; /* Заполняет экран */
+            background-position: center top; /* Фокус чуть выше центра */
+            background-repeat: no-repeat;
             background-attachment: fixed;
             
             color: #fff;
@@ -24,11 +25,10 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px; 
             width: 100%;
-            /* Сделал фон контейнера чуть темнее, чтобы текст читался поверх фото */
-            background: rgba(20, 20, 30, 0.7); 
-            backdrop-filter: blur(8px);
+            background: rgba(20, 20, 30, 0.8); 
+            backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 30px 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
@@ -42,50 +42,58 @@
         .step.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        h2 { font-size: 1.3rem; margin-bottom: 20px; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        h2 { font-size: 1.4rem; margin-bottom: 20px; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         
-        .options { display: flex; flex-direction: column; gap: 15px; }
+        /* Сетка для карточек */
+        .options { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 15px; 
+        }
         
         /* Стили для карточек с картинками */
         .option-card {
             background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.15);
             color: #fff;
             border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
+            flex-direction: column; 
             overflow: hidden;
             text-align: left;
-            align-items: stretch;
             width: 100%;
             padding: 0;
         }
         .option-card:hover {
             background: rgba(255,255,255,0.2);
             border-color: #e94560;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
         .option-card img {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 160px; 
             object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: #333; 
         }
         .card-content {
             padding: 15px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            flex-grow: 1;
         }
         .card-title {
             font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         .card-desc {
             font-size: 0.85rem;
-            color: #ddd;
-            line-height: 1.3;
+            color: #ccc;
+            line-height: 1.4;
         }
 
         .final-msg { text-align: center; font-size: 1.2rem; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
@@ -104,7 +112,7 @@
             <div class="options">
                 
                 <button class="option-card" onclick="choose('film', 'Интерстеллар')">
-                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9cf38fb7-6482-41db-8251-6e00f3237c4b/300x450" alt="Постер">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Интерстеллар">
                     <div class="card-content">
                         <div class="card-title">🌌 Интерстеллар</div>
                         <div class="card-desc">Фантастика, которая заставит задуматься о времени и космосе.</div>
@@ -112,7 +120,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('film', 'Джентльмены')">
-                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/69036a2e-fd41-44e7-bd1e-d1a7b2b8a2d2/300x450" alt="Постер">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/The_Gentlemen_poster.jpeg/220px-The_Gentlemen_poster.jpeg" alt="Джентльмены">
                     <div class="card-content">
                         <div class="card-title">🕶️ Джентльмены</div>
                         <div class="card-desc">Стильный боевик Гая Ричи с крутыми диалогами.</div>
@@ -120,7 +128,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('film', 'Комедия')">
-                    <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/4483445/4d121a8a-bd35-4318-bd77-85ec24e3087f/300x450" alt="Постер">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/The_Hangover_poster.jpg/220px-The_Hangover_poster.jpg" alt="Комедия">
                     <div class="card-content">
                         <div class="card-title">😂 Что-то лёгкое</div>
                         <div class="card-desc">Просто хорошая комедия, чтобы посмеяться и отдохнуть.</div>
@@ -136,7 +144,7 @@
             <div class="options">
                 
                 <button class="option-card" onclick="choose('snack', 'Попкорн')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Popcorn02.jpg/330px-Popcorn02.jpg" alt="Попкорн">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Popcorn02.jpg/640px-Popcorn02.jpg" alt="Попкорн">
                     <div class="card-content">
                         <div class="card-title">🍿 Попкорн</div>
                         <div class="card-desc">Классика для кино. Сладкий или соленый?</div>
@@ -144,7 +152,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('snack', 'Пицца')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/330px-Eq_it-na_pizza-margherita_sep2005_sml.jpg" alt="Пицца">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg" alt="Пицца">
                     <div class="card-content">
                         <div class="card-title">🍕 Пицца</div>
                         <div class="card-desc">Горячая, с тянущимся сыром. Идеально.</div>
@@ -152,7 +160,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('snack', 'Фрукты и шоколад')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Strawberries_and_chocolate.jpg/330px-Strawberries_and_chocolate.jpg" alt="Фрукты и шоколад">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Strawberries_and_chocolate.jpg/640px-Strawberries_and_chocolate.jpg" alt="Фрукты и шоколад">
                     <div class="card-content">
                         <div class="card-title">🍫 Фрукты и шоколад</div>
                         <div class="card-desc">Сладкая альтернатива, если хочется чего-то полегче.</div>
@@ -168,7 +176,7 @@
             <div class="options">
                 
                 <button class="option-card" onclick="choose('drink', 'Красное вино')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Red_Wine_Glass.jpg/330px-Red_Wine_Glass.jpg" alt="Вино">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Red_Wine_Glass.jpg/640px-Red_Wine_Glass.jpg" alt="Вино">
                     <div class="card-content">
                         <div class="card-title">🍷 Красное вино</div>
                         <div class="card-desc">Для романтического настроения.</div>
@@ -176,7 +184,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('drink', 'Пиво')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Beer_glass.jpg/330px-Beer_glass.jpg" alt="Пиво">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Beer_glass.jpg/640px-Beer_glass.jpg" alt="Пиво">
                     <div class="card-content">
                         <div class="card-title">🍺 Пиво</div>
                         <div class="card-desc">Под чипсы и пиццу залетает отлично.</div>
@@ -184,7 +192,7 @@
                 </button>
 
                 <button class="option-card" onclick="choose('drink', 'Кола/Лимонад')">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Glass_of_Coca-Cola_with_Ice.jpg/330px-Glass_of_Coca-Cola_with_Ice.jpg" alt="Кола">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Glass_of_Coca-Cola_with_Ice.jpg/640px-Glass_of_Coca-Cola_with_Ice.jpg" alt="Кола">
                     <div class="card-content">
                         <div class="card-title">🥤 Кола/Лимонад</div>
                         <div class="card-desc">Классика жанра, холодная и со льдом.</div>
